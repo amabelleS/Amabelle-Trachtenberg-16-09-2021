@@ -4,6 +4,7 @@ import {
   ThemeProvider as Provider,
 } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
+import { purple } from '@material-ui/core/colors';
 
 const ThemeProvider = ({ children }) => {
   const overrides = {
@@ -12,6 +13,7 @@ const ThemeProvider = ({ children }) => {
         backgroundColor: '#303030',
       },
     },
+    // MuiAppBar: { colorPrimary: { backgroundColor: '#FFC0CB' } },
   };
 
   const theme = React.useMemo(
@@ -23,8 +25,18 @@ const ThemeProvider = ({ children }) => {
           primary: {
             main: '#84ffff',
           },
+          secondary: {
+            main: purple[400],
+          },
           error: {
             main: '#f06292',
+          },
+        },
+        components: {
+          MuiAppBar: {
+            defaultProps: {
+              enableColorOnDark: true,
+            },
           },
         },
       }),

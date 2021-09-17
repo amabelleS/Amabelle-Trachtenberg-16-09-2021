@@ -5,7 +5,9 @@ import * as S from './style';
 const Favorites = () => {
   return (
     <S.Favorites>
-      <S.Header>Favorites</S.Header>
+      <S.Content>
+        <S.Header>Favorites</S.Header>
+      </S.Content>
     </S.Favorites>
   );
 };
