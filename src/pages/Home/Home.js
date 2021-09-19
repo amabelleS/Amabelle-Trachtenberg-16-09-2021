@@ -5,6 +5,7 @@ import { useWeatherFetch } from '../../hooks/useWeatherFetch';
 
 import Text from '../../components/Text';
 import Card from '../../components/Card';
+import Spinner from '../../components/Spinner';
 
 import FormControl from '@material-ui/core/FormControl';
 // import InputLabel from '@material-ui/core/InputLabel';
@@ -47,7 +48,6 @@ const Home = () => {
   };
 
   const handelSubmit = () => {
-    console.log(process.env);
     fetchCity(searchTerm);
   };
 
@@ -146,6 +146,16 @@ const Home = () => {
           <p>5 day forcast</p>
         </S.CityContainer> */}
       </S.Content>
+      {isLoading && (
+        <S.SpinnerWrapper>
+          <Spinner
+            color="primary"
+            size="45px"
+            thickness={6}
+            variant="indeterminate"
+          />
+        </S.SpinnerWrapper>
+      )}
     </S.Home>
   );
 };

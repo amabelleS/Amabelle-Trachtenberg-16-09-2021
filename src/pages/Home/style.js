@@ -83,3 +83,8 @@ export const List = styled.div`
   /* margin-block-start: 30px; */
   overflow: auto;
 `;
+
+export const SpinnerWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+`;

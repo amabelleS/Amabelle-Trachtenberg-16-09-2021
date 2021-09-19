@@ -33,13 +33,14 @@ export const useWeatherFetch = () => {
     } catch (err) {
       setError(true);
       setIsLoading(false);
-      console.log(err);
     }
+
+    setIsLoading(false);
   }
 
   async function fetcCityWeather() {
-    // setIsLoading(true);
-    // setError(false);
+    setIsLoading(true);
+    setError(false);
     const response = await axios.get(
       `http://dataservice.accuweather.com/currentconditions/v1/${city.info.Key}?apikey=${process.env.REACT_APP_RESERVE_API_KEY}&details=true`
     );
