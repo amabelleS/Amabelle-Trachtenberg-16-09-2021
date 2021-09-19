@@ -29,10 +29,16 @@ export const useWeatherFetch = () => {
         setCity((prev) => {
           return { ...prev, info: response.data[0] };
         });
+      } else {
+        setError(true);
+        console.log('else:');
+        console.log(error);
       }
     } catch (err) {
       setError(true);
       setIsLoading(false);
+      console.log('catch:');
+      console.log(err);
     }
 
     setIsLoading(false);
