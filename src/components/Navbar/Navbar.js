@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { NavLink, Link, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -10,6 +10,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import Button from '@material-ui/core/Button';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
+import FavoriteIcon from '@mui/icons-material/Favorite';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -26,7 +27,12 @@ const useStyles = makeStyles((theme) => ({
   headerOptions: {
     display: 'flex',
     flex: 1,
-    justifyContent: 'space-evenly',
+    justifyContent: 'flex-end',
+  },
+  header: {
+    backgroundColor: 'pink',
+    color: 'black',
+    boxShadow: '0px 0px 0px 0px',
   },
 }));
 
@@ -64,9 +70,23 @@ export default function Navbar() {
 
   return (
     <div className={classes.root}>
-      <AppBar position="static">
+      <AppBar
+        position="static"
+        style={{
+          backgroundColor: 'default',
+          color: 'black',
+          boxShadow: '0px 0px 0px 0px',
+        }}
+      >
         <Toolbar>
-          <Typography variant="h6" className={classes.title}>
+          <Typography
+            variant="h6"
+            style={{
+              backgroundColor: 'transparent',
+              color: 'black',
+              boxShadow: '0px 0px 0px 0px',
+            }}
+          >
             Herolo Home Assignment
           </Typography>
           {isMobile ? (
@@ -98,7 +118,10 @@ export default function Navbar() {
                 {menuItems.map((menuItem) => {
                   const { menuTitle, pageURL } = menuItem;
                   return (
-                    <MenuItem onClick={() => handleMenuClick(pageURL)}>
+                    <MenuItem
+                      key={menuTitle}
+                      onClick={() => handleMenuClick(pageURL)}
+                    >
                       {menuTitle}
                     </MenuItem>
                   );
@@ -108,14 +131,16 @@ export default function Navbar() {
           ) : (
             <div className={classes.headerOptions}>
               <Button
+                color="secondary"
                 variant="contained"
                 onClick={() => handleButtonClick('/')}
               >
-                HOME
+                Home
               </Button>
               <Button
                 variant="contained"
                 onClick={() => handleButtonClick('/favorites')}
+                startIcon={<FavoriteIcon />}
               >
                 Favorites
               </Button>
