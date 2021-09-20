@@ -13,6 +13,7 @@ const initialState = {
 
 export const useWeatherFetch = () => {
   const [city, setCity] = useState(initialState);
+  const [autoCompleteResults, setAutoCompleteResults] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
 
@@ -22,37 +23,53 @@ export const useWeatherFetch = () => {
 
     try {
       const response = await axios.get(
-        `http://dataservice.accuweather.com/locations/v1/cities/autocomplete?apikey=${process.env.REACT_APP_RESERVE_API_KEY}&q=${searchTerm}`
+        `http://dataservice.accuweather.com/locations/v1/cities/autocomplete?apikey=${process.env.REACT_APP_WEATHER_API_KEY}&q=${searchTerm}`
       );
-      //   console.log(response);
+
+      console.log(
+        '🚀 ~ file: useWeatherFetch.js ~ line 29 ~ fetchCity ~ response',
+        response
+      );
       if (response.data.length >= 1) {
-        setCity((prev) => {
-          return { ...prev, info: response.data[0] };
-        });
+        //   setCity((prev) => {
+        //     return { ...prev, info: response.data[0] };
+        //   });
+        setAutoCompleteResults(response.data);
       } else {
         setError(true);
-        console.log('else:');
-        console.log(error);
+        console.log(
+          '🚀 ~ file: useWeatherFetch.js ~ line 36 ~ fetchCity ~ error',
+          error
+        );
       }
     } catch (err) {
       setError(true);
       setIsLoading(false);
-      console.log('catch:');
-      console.log(err);
+      console.log(
+        '🚀 ~ file: useWeatherFetch.js ~ line 41 ~ fetchCity ~ err-catch',
+        err
+      );
     }
 
     setIsLoading(false);
   }
 
-  async function fetcCityWeather() {
-    setIsLoading(true);
+  async function fetcCityWeather(result, locationKey) {
+    setAutoCompleteResults([]);
+    // setIsLoading(true);
     setError(false);
     const response = await axios.get(
-      `http://dataservice.accuweather.com/currentconditions/v1/${city.info.Key}?apikey=${process.env.REACT_APP_RESERVE_API_KEY}&details=true`
+      `http://dataservice.accuweather.com/currentconditions/v1/${locationKey}?apikey=${process.env.REACT_APP_WEATHER_API_KEY}&details=true`
+      //   `http://dataservice.accuweather.com/currentconditions/v1/${city.info.Key}?apikey=${process.env.REACT_APP_RESERVE_API_KEY}&details=true`
+    );
+    console.log(
+      '🚀 ~ file: useWeatherFetch.js ~ line 70 ~ fetcCityWeather ~ response',
+      response
     );
 
     const updatedCity = {
       ...city,
+      info: result,
       current: response.data[0],
     };
 
@@ -60,10 +77,10 @@ export const useWeatherFetch = () => {
   }
 
   async function fetcCityforcast() {
-    // setError(false);
+    setError(false);
 
     const response = await axios.get(
-      `http://dataservice.accuweather.com/forecasts/v1/daily/5day/${city.info.Key}?apikey=${process.env.REACT_APP_RESERVE_API_KEY}&details=true&metric=true`
+      `http://dataservice.accuweather.com/forecasts/v1/daily/5day/${city.info.Key}?apikey=${process.env.REACT_APP_WEATHER_API_KEY}&details=true&metric=true`
     );
 
     const updatedCity = {
@@ -76,7 +93,11 @@ export const useWeatherFetch = () => {
   }
 
   useEffect(() => {
-    fetcCityWeather();
+    console.log(
+      '🚀 ~ file: useWeatherFetch.js ~ line 107 ~ useWeatherFetch ~ city',
+      city
+    );
+    // fetcCityWeather();
     fetcCityforcast();
   }, [city.info]);
 
@@ -89,5 +110,8 @@ export const useWeatherFetch = () => {
     isLoading,
     error,
     fetchCity,
+    autoCompleteResults,
+    setCity,
+    fetcCityWeather,
   };
 };

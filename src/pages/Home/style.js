@@ -19,6 +19,8 @@ export const Content = styled.div`
 
 export const Header = styled.div`
   display: flex;
+  flex-direction: row;
+  align-items: center;
 `;
 
 export const SearchSubmitContainer = styled.div`
@@ -31,6 +33,28 @@ export const SearchContainer = styled.div`
   display: flex;
   flex-direction: column;
   /* padding: 1rem; */
+`;
+
+export const Results = styled.div`
+  position: absolute;
+  background: #000000;
+  color: #e7e7e7;
+  /* width: 100%; */
+  z-index: 22;
+  /* top: 6rem; */
+  /* right: 6rem; */
+  border: 1px solid #e7e7e7;
+  /* box-shadow: 0px 2px 3px 0px #e7e7e7; */
+  .result {
+    padding: 1rem;
+    border-bottom: 1px solid #cbcbcb;
+    transition: all 0.2s;
+    &:hover {
+      background: #f0f0f0;
+      color: #000000;
+      cursor: pointer;
+    }
+  }
 `;
 
 export const CityContainer = styled.div`

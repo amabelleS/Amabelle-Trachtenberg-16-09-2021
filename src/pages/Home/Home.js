@@ -29,7 +29,14 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 });
 
 const Home = () => {
-  const { city, isLoading, fetchCity, error } = useWeatherFetch();
+  const {
+    city,
+    isLoading,
+    fetchCity,
+    error,
+    autoCompleteResults,
+    fetcCityWeather,
+  } = useWeatherFetch();
   const [searchTerm, setSearchTerm] = useState('');
   const [open, setOpen] = useState(false);
 
@@ -50,10 +57,6 @@ const Home = () => {
     fetchCity(searchTerm);
   };
 
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
   const handleClose = () => {
     setOpen(false);
   };
@@ -67,7 +70,21 @@ const Home = () => {
   return (
     <>
       <S.Home>
+        {autoCompleteResults.length ? (
+          <S.Results>
+            {autoCompleteResults.map((result) => (
+              <div
+                className="result"
+                onClick={() => fetcCityWeather(result, result.Key)}
+                key={result.Key}
+              >
+                {result.LocalizedName}, {result.Country.LocalizedName}
+              </div>
+            ))}
+          </S.Results>
+        ) : null}
         <S.Content>
+          {/* <S.Header> */}
           <FormControl>
             <S.SearchSubmitContainer>
               <S.SearchContainer>
@@ -93,6 +110,7 @@ const Home = () => {
               </IconButton>
             </S.SearchSubmitContainer>
           </FormControl>
+          {/* </S.Header> */}
 
           <S.CityContainer
           //   onMouseEnter={() => handleMouseEnter(city)}
@@ -134,23 +152,6 @@ const Home = () => {
                 })}
             </S.List>
           </S.CityContainer>
-          {/* <S.CityContainer>
-          <p>
-            city name:{' '}
-            {city ? city.info.AdministrativeArea.LocalizedName : null}
-          </p>
-          <p>
-            Temp:{' '}
-            {city
-              ? city.DailyForcast.ApparentTemperature.Metric.Value +
-                '' +
-                city.DailyForcast.ApparentTemperature.Metric.Unit
-              : null}
-          </p>
-          <p>favorites</p>
-          <p>forcast</p>
-          <p>5 day forcast</p>
-        </S.CityContainer> */}
         </S.Content>
         {isLoading && (
           <S.SpinnerWrapper>
