@@ -110,6 +110,7 @@ export const List = styled.div`
 `;
 
 export const SpinnerWrapper = styled.div`
+  position: absolute;
   display: flex;
   justify-content: center;
 `;

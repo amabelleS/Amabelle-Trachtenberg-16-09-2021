@@ -69,48 +69,48 @@ const Home = () => {
 
   return (
     <>
+      {autoCompleteResults.length && searchTerm ? (
+        <S.Results>
+          {autoCompleteResults.map((result) => (
+            <div
+              className="result"
+              onClick={() => fetcCityWeather(result, result.Key)}
+              key={result.Key}
+            >
+              {result.LocalizedName}, {result.Country.LocalizedName}
+            </div>
+          ))}
+        </S.Results>
+      ) : null}
       <S.Home>
-        {autoCompleteResults.length ? (
-          <S.Results>
-            {autoCompleteResults.map((result) => (
-              <div
-                className="result"
-                onClick={() => fetcCityWeather(result, result.Key)}
-                key={result.Key}
-              >
-                {result.LocalizedName}, {result.Country.LocalizedName}
-              </div>
-            ))}
-          </S.Results>
-        ) : null}
         <S.Content>
-          {/* <S.Header> */}
-          <FormControl>
-            <S.SearchSubmitContainer>
-              <S.SearchContainer>
-                {/* <InputLabel htmlFor="my-input">Search Your City</InputLabel> */}
-                <Input
-                  id="my-input"
-                  aria-describedby="my-helper-text"
-                  value={searchTerm}
-                  onChange={handleInputChange}
-                  style={{ width: '11rem' }}
-                />
-                <FormHelperText id="my-helper-text">
-                  Search by city name.
-                </FormHelperText>
-              </S.SearchContainer>
-              <IconButton
-                type="submit"
-                sx={{ p: '10px' }}
-                aria-label="search"
-                onClick={handelSubmit}
-              >
-                <SearchIcon />
-              </IconButton>
-            </S.SearchSubmitContainer>
-          </FormControl>
-          {/* </S.Header> */}
+          <S.Header>
+            <FormControl>
+              <S.SearchSubmitContainer>
+                <S.SearchContainer>
+                  {/* <InputLabel htmlFor="my-input">Search Your City</InputLabel> */}
+                  <Input
+                    id="my-input"
+                    aria-describedby="my-helper-text"
+                    value={searchTerm}
+                    onChange={handleInputChange}
+                    style={{ width: '11rem' }}
+                  />
+                  <FormHelperText id="my-helper-text">
+                    Search by city name.
+                  </FormHelperText>
+                </S.SearchContainer>
+                <IconButton
+                  type="submit"
+                  sx={{ p: '10px' }}
+                  aria-label="search"
+                  onClick={handelSubmit}
+                >
+                  <SearchIcon />
+                </IconButton>
+              </S.SearchSubmitContainer>
+            </FormControl>
+          </S.Header>
 
           <S.CityContainer
           //   onMouseEnter={() => handleMouseEnter(city)}
@@ -152,17 +152,17 @@ const Home = () => {
                 })}
             </S.List>
           </S.CityContainer>
+          {isLoading && (
+            <S.SpinnerWrapper>
+              <Spinner
+                color="primary"
+                size="6rem"
+                thickness={3}
+                variant="indeterminate"
+              />
+            </S.SpinnerWrapper>
+          )}
         </S.Content>
-        {isLoading && (
-          <S.SpinnerWrapper>
-            <Spinner
-              color="primary"
-              size="45px"
-              thickness={6}
-              variant="indeterminate"
-            />
-          </S.SpinnerWrapper>
-        )}
       </S.Home>
       <Dialog
         open={open}

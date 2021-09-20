@@ -11,6 +11,7 @@ import Menu from '@material-ui/core/Menu';
 import Button from '@material-ui/core/Button';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import HomeIcon from '@mui/icons-material/Home';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -134,13 +135,14 @@ export default function Navbar() {
                 color="secondary"
                 variant="contained"
                 onClick={() => handleButtonClick('/')}
+                startIcon={<HomeIcon />}
               >
                 Home
               </Button>
               <Button
                 variant="contained"
                 onClick={() => handleButtonClick('/favorites')}
-                startIcon={<FavoriteIcon />}
+                startIcon={<FavoriteIcon color="error" />}
               >
                 Favorites
               </Button>
