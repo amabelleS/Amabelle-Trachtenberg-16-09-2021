@@ -1,7 +1,6 @@
-import React, { useState, useEffect, useContext, useMemo } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import Context from '../../context/favorites/context';
 import { useWeatherFetch } from '../../hooks/useWeatherFetch';
 
 import {
@@ -9,13 +8,8 @@ import {
   setLocation,
   getWeatherForcast,
   getWeatherToday,
-  // addToFavorites,
-  // removeFromFavorites,
 } from './../../store/actions/weatherActions';
 import {
-  // getLocation,
-  // setLocation,
-  // getWeatherInfo,
   addToFavorites,
   removeFromFavorites,
 } from './../../store/actions/favoritesActions';
@@ -47,32 +41,25 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 });
 
 const Home = () => {
-  const {
-    // city,
-    isLoading,
-    // fetchCity,
-    error,
-    // autoCompleteResults,
-    fetcCityWeather,
-  } = useWeatherFetch();
-
   // const {
-  //   // favoritesState,
-  //   // handleMouseEnter,
-  //   // handleMouseLeave,
-  //   isCityInFavorites,
-  //   switchFavorites,
-  // } = useContext(Context);
+  //   // city,
+  //   isLoading,
+  //   // fetchCity,
+  //   error,
+  //   // autoCompleteResults,
+  //   // fetcCityWeather,
+  // } = useWeatherFetch();
 
-  // -----
-  // const [search, setSearch] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
   const dispatch = useDispatch();
   const [searchResult, setSearchResult] = useState([]);
   const [weatherInfo, setWeatherInfo] = useState(null);
   const favoritesKeys = useSelector((state) => state.favorites.keys);
   const selectedLocation = useSelector((state) => state.weather.location);
+  const isLoading = useSelector((state) => state.weather.isLoading);
+  // const error = useSelector((state) => state.weather.error);
   const [open, setOpen] = useState(false);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     const onMountHome = async () => {
@@ -85,7 +72,7 @@ const Home = () => {
       }
     };
 
-    // onMountHome();
+    onMountHome();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -96,8 +83,10 @@ const Home = () => {
   const onKeydownHandle = (e) => e.key === 'Enter' && onSearchHandle();
 
   const onSearchHandle = async () => {
-    // fetchCity(searchTerm);
     const res = await dispatch(getLocation(searchTerm));
+    if (res.length < 1) {
+      setError(true);
+    }
     setSearchResult(res);
   };
 
@@ -114,10 +103,6 @@ const Home = () => {
   }, [searchTerm]);
 
   useEffect(() => {
-    // console.log(
-    //   '🚀 ~ file: Home.js ~ line 124 ~ useEffect ~ selectedLocation',
-    //   selectedLocation
-    // );
     if (!selectedLocation) return;
     fetchInfo();
   }, [selectedLocation]);
@@ -130,16 +115,7 @@ const Home = () => {
       forcast,
     };
     setWeatherInfo(updatedCityWeather);
-    // console.log(
-    //   '🚀 ~ file: Home.js ~ line 126 ~ fetchInfo ~ updatedCityWeather',
-    //   updatedCityWeather
-    // );
   };
-
-  // const isLocSaved = useMemo(
-  //   () => favList.some((loc) => loc.key === selectedLocation.Key),
-  //   [favList, selectedLocation]
-  // );
 
   const isLocSaved = () => {
     if (!selectedLocation) return;
@@ -224,9 +200,11 @@ const Home = () => {
                     : null}
                 </Text>
                 <Text size="1.5rem" bold>
-                  {weatherInfo.today.Temperature.Metric.Value +
-                    '\u00b0' +
-                    weatherInfo.today.Temperature.Metric.Unit}
+                  {selectedLocation && weatherInfo
+                    ? weatherInfo.today.Temperature.Metric.Value +
+                      '\u00b0' +
+                      weatherInfo.today.Temperature.Metric.Unit
+                    : null}
                 </Text>
                 <Text size="1.8rem">
                   {weatherInfo ? weatherInfo.today.WeatherText : ''}

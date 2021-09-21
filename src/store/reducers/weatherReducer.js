@@ -8,6 +8,8 @@ const initialState = {
   location: null,
   currentCity: {},
   forcast: {},
+  isLoading: false,
+  error: null,
 };
 
 const weatherReducer = (state = initialState, action) => {

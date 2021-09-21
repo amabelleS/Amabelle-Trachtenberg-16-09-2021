@@ -30,6 +30,7 @@ export const getWeatherForcast = () => {
     return res.data;
   };
 };
+
 export const getWeatherToday = () => {
   return async (dispatch, getState) => {
     const state = getState();

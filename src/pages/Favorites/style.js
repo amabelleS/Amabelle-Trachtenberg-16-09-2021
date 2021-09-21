@@ -20,3 +20,39 @@ export const Content = styled.div`
 export const Header = styled.div`
   display: flex;
 `;
+
+export const List = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  width: 100%;
+  overflow: auto;
+
+  ::-webkit-scrollbar {
+    width: 0.42rem;
+  }
+
+  ::-webkit-scrollbar-track {
+    background-color: #84ffff;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background: #000000;
+  }
+
+  @media (max-width: 800px) {
+    display: block;
+    /* flex-direction: column; */
+  }
+`;
+
+export const SpinnerWrapper = styled.div`
+  position: absolute;
+  display: flex;
+  justify-content: center;
+`;

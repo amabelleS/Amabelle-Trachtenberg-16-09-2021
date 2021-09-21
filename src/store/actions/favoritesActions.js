@@ -26,13 +26,6 @@ export const removeFromFavorites = (key = null) => {
   };
 };
 
-const getCityWeather = async (key) => {
-  const promise = await axios.get(
-    `http://dataservice.accuweather.com/currentconditions/v1/${key}?apikey=${process.env.REACT_APP_RESERVE_API_KEY}&details=true`
-  );
-  return promise.data;
-};
-
 export const getFavoritesWeather = () => {
   return async (dispatch, getState) => {
     const state = getState();
@@ -46,7 +39,8 @@ export const getFavoritesWeather = () => {
           const res = await axios.get(
             `http://dataservice.accuweather.com/currentconditions/v1/${key}?apikey=${process.env.REACT_APP_RESERVE_API_KEY}&details=true`
           );
-          resolve(res.data[0]);
+          const city = { ...res.data[0], key };
+          resolve(city);
         })
     );
 
