@@ -187,7 +187,7 @@ const Home = () => {
           <S.Header>
             <FormControl>
               <S.SearchSubmitContainer>
-                <S.SearchContainer>
+                <S.FlexColum>
                   {/* <InputLabel htmlFor="my-input">Search Your City</InputLabel> */}
                   <Input
                     id="my-input"
@@ -200,7 +200,7 @@ const Home = () => {
                   <FormHelperText id="my-helper-text">
                     Search by city name.
                   </FormHelperText>
-                </S.SearchContainer>
+                </S.FlexColum>
                 <IconButton
                   type="submit"
                   sx={{ p: '10px' }}
@@ -213,48 +213,50 @@ const Home = () => {
             </FormControl>
           </S.Header>
 
-          <S.CityContainer
-          //   onMouseEnter={() => handleMouseEnter(city)}
-          //   onMouseLeave={handleMouseLeave}
-          >
+          <S.CityContainer>
             <S.CurrentHeader>
-              <Text size="2rem" bold>
-                {selectedLocation && weatherInfo
-                  ? selectedLocation.LocalizedName +
-                    ', ' +
-                    selectedLocation.Country.LocalizedName +
-                    weatherInfo.today.Temperature.Metric.Value +
+              <S.FlexColum>
+                <Text size="2rem" bold>
+                  {selectedLocation && weatherInfo
+                    ? selectedLocation.LocalizedName +
+                      ', ' +
+                      selectedLocation.Country.LocalizedName
+                    : null}
+                </Text>
+                <Text size="1.5rem" bold>
+                  {weatherInfo.today.Temperature.Metric.Value +
                     '\u00b0' +
-                    weatherInfo.today.Temperature.Metric.Unit
-                  : null}
-              </Text>
-              <Text size="1.8rem">
-                {weatherInfo ? weatherInfo.today.WeatherText : ''}
-              </Text>
+                    weatherInfo.today.Temperature.Metric.Unit}
+                </Text>
+                <Text size="1.8rem">
+                  {weatherInfo ? weatherInfo.today.WeatherText : ''}
+                </Text>
+              </S.FlexColum>
               <S.IconButtonWrapper
                 onClick={toggleSave}
-                // onClick={() => switchFavorites(city)}
                 isVisible={selectedLocation && isLocSaved()}
-                // isVisible={isCityInFavorites(city.info.Key)}
               >
                 <Button
                   // variant="outlined"
+                  color="primary"
                   startIcon={<FavoriteIcon color="error" />}
                 >
                   {isLocSaved() ? 'Remove' : 'Add To Favorites'}
                 </Button>
               </S.IconButtonWrapper>
             </S.CurrentHeader>
-
             <Text bold size="2rem">
               {weatherInfo ? weatherInfo.forcast.Headline.Text : ''}
             </Text>
+            {/* <S.FlexColum> */}
+
             <S.List>
               {weatherInfo &&
                 weatherInfo.forcast.DailyForecasts.map((day, index) => {
                   return <Card city={weatherInfo} day={day} key={index}></Card>;
                 })}
             </S.List>
+            {/* </S.FlexColum> */}
           </S.CityContainer>
           {isLoading && (
             <S.SpinnerWrapper>

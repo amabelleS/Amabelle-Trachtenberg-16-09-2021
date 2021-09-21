@@ -29,9 +29,12 @@ export const SearchSubmitContainer = styled.div`
   padding: 1rem;
 `;
 
-export const SearchContainer = styled.div`
+export const FlexColum = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+  /* height: 50%; */
+  /* flex-grow: 1; */
   /* padding: 1rem; */
 `;
 
@@ -65,15 +68,21 @@ export const CityContainer = styled.div`
 
   padding: 1rem;
   width: 80%;
-  height: 62%;
-  border: 1px solid rgb(221, 87, 199);
+  height: 77%;
+  border: 1px solid #84ffff;
+  /* border: 1px solid rgb(221, 87, 199); */
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
   border-radius: 6px;
   background: rgba(240, 228, 237, 0.2);
+  color: #84ffff;
 
   &:hover {
     background: rgba(3, 160, 176, 0.5);
     border: 1px solid #08f7fb;
+  }
+
+  @media (max-width: 800px) {
+    height: 100%;
   }
 `;
 
@@ -100,13 +109,32 @@ export const CityForcast = styled.div`
 
 export const List = styled.div`
   display: flex;
+  flex-direction: row;
   justify-content: space-between;
+  flex-wrap: wrap;
   width: 100%;
-  gap: 35px;
-  /* width: 500px; */
-  /* height: calc(100vh - 270px); */
-  /* margin-block-start: 30px; */
   overflow: auto;
+
+  ::-webkit-scrollbar {
+    width: 0.42rem;
+  }
+
+  ::-webkit-scrollbar-track {
+    background-color: #84ffff;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background: #000000;
+  }
+
+  @media (max-width: 800px) {
+    display: block;
+    /* flex-direction: column; */
+  }
 `;
 
 export const SpinnerWrapper = styled.div`

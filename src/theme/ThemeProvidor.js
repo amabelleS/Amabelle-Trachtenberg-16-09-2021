@@ -4,7 +4,6 @@ import {
   ThemeProvider as Provider,
 } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import { purple } from '@material-ui/core/colors';
 
 const ThemeProvider = ({ children }) => {
   const overrides = {

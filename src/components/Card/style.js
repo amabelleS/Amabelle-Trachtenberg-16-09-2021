@@ -4,14 +4,18 @@ export const Card = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  gap: 6px;
+  justify-content: space-evenly;
+  /* gap: 6px; */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+  border-radius: 6px;
+  height: 180px;
+  margin: 8px;
 `;
 
 export const Images = styled.div`
   display: flex;
   flex-direction: row;
-  padding: 1rem;
+  /* padding: 1rem; */
 `;
 
 export const Temperature = styled.div`

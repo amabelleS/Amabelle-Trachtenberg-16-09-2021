@@ -115,7 +115,7 @@ export default function Navbar() {
               <Button
                 variant="contained"
                 onClick={() => handleButtonClick('/')}
-                startIcon={<HomeIcon />}
+                startIcon={<HomeIcon color="inherit" />}
                 style={{ marginRight: '0.42rem' }}
               >
                 Home
