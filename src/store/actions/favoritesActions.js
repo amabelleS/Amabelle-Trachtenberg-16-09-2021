@@ -1,3 +1,4 @@
+import axios from 'axios';
 import * as types from './types';
 
 export const addToFavorites = () => {
@@ -22,5 +23,39 @@ export const removeFromFavorites = (key = null) => {
       payload: state.weather.location?.Key || key,
     });
     // localStorage.setItem('favorites', JSON.stringify(state.favorites));
+  };
+};
+
+const getCityWeather = async (key) => {
+  const promise = await axios.get(
+    `http://dataservice.accuweather.com/currentconditions/v1/${key}?apikey=${process.env.REACT_APP_RESERVE_API_KEY}&details=true`
+  );
+  return promise.data;
+};
+
+export const getFavoritesWeather = () => {
+  return async (dispatch, getState) => {
+    const state = getState();
+    console.log(state);
+    // const { Key } = state.weather.location;
+    dispatch({ type: types.SET_LOADING, payload: true });
+
+    const promises = state.favorites.keys.map(
+      (key) =>
+        new Promise(async (resolve) => {
+          const res = await axios.get(
+            `http://dataservice.accuweather.com/currentconditions/v1/${key}?apikey=${process.env.REACT_APP_RESERVE_API_KEY}&details=true`
+          );
+          resolve(res.data[0]);
+        })
+    );
+
+    const data = await Promise.all(promises);
+    dispatch({ type: types.SET_LOADING, payload: false });
+    console.log(
+      '🚀 ~ file: favoritesActions.js ~ line 57 ~ return ~ data',
+      data
+    );
+    return data;
   };
 };
