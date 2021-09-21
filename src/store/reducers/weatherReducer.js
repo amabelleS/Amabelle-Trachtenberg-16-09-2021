@@ -22,6 +22,13 @@ const weatherReducer = (state = initialState, action) => {
         location: payload,
       };
 
+    case types.SET_LOADING: {
+      return {
+        ...state,
+        isLoading: payload,
+      };
+    }
+
     default:
       return state;
   }

@@ -4,6 +4,7 @@ const initialState = {
   // location: null,
   locations: JSON.parse(localStorage.getItem('favorites')) || [],
   keys: JSON.parse(localStorage.getItem('keys')) || [],
+  isLoading: false,
 };
 
 const favoritesReducer = (state = initialState, action) => {
@@ -23,6 +24,13 @@ const favoritesReducer = (state = initialState, action) => {
         ...state,
         locations: [...state.locations, payload],
         keys: [...state.keys, payload.Key],
+      };
+    }
+
+    case types.SET_LOADING: {
+      return {
+        ...state,
+        isLoading: payload,
       };
     }
 
