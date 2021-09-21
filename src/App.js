@@ -7,6 +7,9 @@ import {
 } from 'react-router-dom';
 
 import ThemeProvider from './theme/ThemeProvidor';
+import { Provider } from 'react-redux';
+import store from './store';
+
 import { FavoritesProvider } from './context/favorites';
 import { Home, Favorites } from './pages';
 import Navbar from './components/Navbar/Navbar';
@@ -16,12 +19,14 @@ function App() {
     <FavoritesProvider>
       <ThemeProvider>
         <Router>
-          <Navbar />
-          <Switch>
-            <Route exact path="/" component={Home} />
-            <Route exact path="/favorites" component={Favorites} />
-            <Redirect to="/" />
-          </Switch>
+          <Provider store={store}>
+            <Navbar />
+            <Switch>
+              <Route exact path="/" component={Home} />
+              <Route exact path="/favorites" component={Favorites} />
+              <Redirect to="/" />
+            </Switch>
+          </Provider>
         </Router>
       </ThemeProvider>
     </FavoritesProvider>
