@@ -26,7 +26,8 @@ const ThemeProvider = ({ children }) => {
             main: '#84ffff',
           },
           secondary: {
-            main: purple[400],
+            light: '#0066ff',
+            main: '#000000',
           },
           error: {
             main: '#f06292',

@@ -13,6 +13,8 @@ import useMediaQuery from '@material-ui/core/useMediaQuery';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import HomeIcon from '@mui/icons-material/Home';
 
+import * as S from './style';
+
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -29,11 +31,6 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flex: 1,
     justifyContent: 'flex-end',
-  },
-  header: {
-    backgroundColor: 'pink',
-    color: 'black',
-    boxShadow: '0px 0px 0px 0px',
   },
 }));
 
@@ -70,28 +67,12 @@ export default function Navbar() {
   ];
 
   return (
-    <div className={classes.root}>
-      <AppBar
-        position="static"
-        style={{
-          backgroundColor: 'default',
-          color: 'black',
-          boxShadow: '0px 0px 0px 0px',
-        }}
-      >
+    <S.Navbar>
+      <AppBar position="sticky">
         <Toolbar>
-          <Typography
-            variant="h6"
-            style={{
-              backgroundColor: 'transparent',
-              color: 'black',
-              boxShadow: '0px 0px 0px 0px',
-            }}
-          >
-            Herolo Home Assignment
-          </Typography>
+          <Typography variant="h6">Herolo Home Assignment</Typography>
           {isMobile ? (
-            <>
+            <div className={classes.headerOptions}>
               <IconButton
                 edge="start"
                 className={classes.menuButton}
@@ -128,19 +109,20 @@ export default function Navbar() {
                   );
                 })}
               </Menu>
-            </>
+            </div>
           ) : (
             <div className={classes.headerOptions}>
               <Button
-                color="secondary"
                 variant="contained"
                 onClick={() => handleButtonClick('/')}
                 startIcon={<HomeIcon />}
+                style={{ marginRight: '0.42rem' }}
               >
                 Home
               </Button>
               <Button
                 variant="contained"
+                color="secondary"
                 onClick={() => handleButtonClick('/favorites')}
                 startIcon={<FavoriteIcon color="error" />}
               >
@@ -150,7 +132,7 @@ export default function Navbar() {
           )}
         </Toolbar>
       </AppBar>
-    </div>
+    </S.Navbar>
   );
 }
 

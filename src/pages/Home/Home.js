@@ -85,7 +85,7 @@ const Home = () => {
       }
     };
 
-    onMountHome();
+    // onMountHome();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
