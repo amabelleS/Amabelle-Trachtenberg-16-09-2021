@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+// import {} from '../../assets/';
 
 export const Card = styled.div`
   flex: 1;
@@ -13,7 +14,9 @@ export const Card = styled.div`
   margin: 8px;
   padding: 1rem;
   /* background: rgba(240, 228, 237, 0.2); */
-  background-image: url('https://cdn.pixabay.com/photo/2016/08/07/17/12/angel-1576656_960_720.jpg');
+  /* background: url('https://cdn.pixabay.com/photo/2015/10/12/14/59/milky-way-984050__340.jpg'); */
+  /* background: url('https://cdn.pixabay.com/photo/2015/07/02/10/13/sky-828648__340.jpg'); */
+  background: url('https://cdn.pixabay.com/photo/2021/08/17/14/48/sea-6553205__340.jpg');
   background-position: center;
   background-size: cover;
 

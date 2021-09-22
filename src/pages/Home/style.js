@@ -33,6 +33,10 @@ export const FlexColumCenter = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  @media (max-width: 800px) {
+    flex-direction: row;
+  }
 `;
 export const FlexColumLeft = styled.div`
   display: flex;
@@ -103,11 +107,21 @@ export const CityContainer = styled.div`
 `;
 
 export const CurrentHeader = styled.div`
+  flex-shrink: 2;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   margin: 1.5rem 0;
   width: 100%;
+
+  @media (max-width: 800px) {
+    /* height: 100%; */
+    /* display: block; */
+    flex-direction: column;
+    align-items: center;
+    height: 42vh;
+    font-size: 1rem;
+  }
 `;
 
 export const IconButtonWrapper = styled.div`
@@ -129,6 +143,7 @@ export const List = styled.div`
   justify-content: space-between;
   flex-wrap: wrap;
   width: 100%;
+
   overflow: auto;
 
   ::-webkit-scrollbar {
@@ -149,7 +164,7 @@ export const List = styled.div`
 
   @media (max-width: 800px) {
     display: block;
-    /* flex-direction: column; */
+    /* height: 42vh; */
   }
 `;
 
