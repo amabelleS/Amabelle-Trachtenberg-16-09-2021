@@ -1,8 +1,6 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-// import { useWeatherFetch } from '../../hooks/useWeatherFetch';
-
 import {
   getLocation,
   setLocation,
@@ -25,7 +23,9 @@ import SearchIcon from '@mui/icons-material/Search';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import IconButton from '@material-ui/core/IconButton';
 import FavoriteIcon from '@material-ui/icons/Favorite';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
 import Button from '@material-ui/core/Button';
+import humidityIcon from '../../assets/humidity_percentage_precipitation_icon.png';
 
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -102,6 +102,10 @@ const Home = () => {
       selectedLocation
     );
     fetchInfo();
+    console.log(
+      '🚀 ~ file: Home.js ~ line 107 ~ useEffect ~ weatherInfo',
+      weatherInfo
+    );
   }, [selectedLocation]);
 
   const fetchInfo = async () => {
@@ -126,7 +130,7 @@ const Home = () => {
         ? removeFromFavorites(selectedLocation.Key)
         : addToFavorites()
     );
-    console.log('🚀 ~ file: Home.js ~ line 74 ~ Home ~ favs', favoritesKeys);
+    // console.log('🚀 ~ file: Home.js ~ line 74 ~ Home ~ favs', favoritesKeys);
   };
 
   const handleClose = () => {
@@ -146,7 +150,6 @@ const Home = () => {
           {searchResult.map((result) => (
             <div
               className="result"
-              // onClick={() => fetcCityWeather(result, result.Key)}
               onClick={() => onSelectLocationHandle(result)}
               key={result.Key}
             >
@@ -160,7 +163,7 @@ const Home = () => {
           <S.Header>
             <FormControl>
               <S.SearchSubmitContainer>
-                <S.FlexColum>
+                <S.FlexColumLeft>
                   {/* <InputLabel htmlFor="my-input">Search Your City</InputLabel> */}
                   <Input
                     id="my-input"
@@ -173,7 +176,7 @@ const Home = () => {
                   <FormHelperText id="my-helper-text">
                     Search by city name.
                   </FormHelperText>
-                </S.FlexColum>
+                </S.FlexColumLeft>
                 <IconButton
                   type="submit"
                   sx={{ p: '10px' }}
@@ -188,25 +191,45 @@ const Home = () => {
 
           <S.CityContainer>
             <S.CurrentHeader>
-              <S.FlexColum>
+              <S.FlexColumLeft>
                 <Text size="2rem" bold>
+                  <LocationOnIcon fontSize="medium" />
                   {selectedLocation && weatherInfo
                     ? selectedLocation.LocalizedName +
                       ', ' +
                       selectedLocation.Country.LocalizedName
                     : null}
                 </Text>
-                <Text size="1.5rem" bold>
-                  {selectedLocation && weatherInfo
-                    ? weatherInfo.today.Temperature.Metric.Value +
-                      '\u00b0' +
-                      weatherInfo.today.Temperature.Metric.Unit
-                    : null}
-                </Text>
-                <Text size="1.8rem">
+
+                <Text size="1.7rem">
                   {weatherInfo ? weatherInfo.today.WeatherText : ''}
                 </Text>
-              </S.FlexColum>
+                <S.ImageTextContainer>
+                  <Text size="1.5rem">
+                    {weatherInfo ? weatherInfo.today.RelativeHumidity : ''}
+                  </Text>
+                  <S.Humidity src={humidityIcon} alt="humidity" />
+                </S.ImageTextContainer>
+              </S.FlexColumLeft>
+              {weatherInfo ? (
+                <S.FlexColumCenter>
+                  <S.ImageContainer
+                    src={`https://developer.accuweather.com/sites/default/files/${
+                      weatherInfo.today.WeatherIcon < 10
+                        ? `0${weatherInfo.today.WeatherIcon}`
+                        : weatherInfo.today.WeatherIcon
+                    }-s.png`}
+                    alt=""
+                  />
+                  <Text size="2rem" bold>
+                    {selectedLocation && weatherInfo
+                      ? weatherInfo.today.Temperature.Metric.Value +
+                        '\u00b0' +
+                        weatherInfo.today.Temperature.Metric.Unit
+                      : null}
+                  </Text>
+                </S.FlexColumCenter>
+              ) : null}
               <S.IconButtonWrapper
                 onClick={toggleSave}
                 isVisible={selectedLocation && isLocSaved()}
@@ -223,15 +246,12 @@ const Home = () => {
             <Text bold size="2rem">
               {weatherInfo ? weatherInfo.forcast.Headline.Text : ''}
             </Text>
-            {/* <S.FlexColum> */}
-
             <S.List>
               {weatherInfo &&
                 weatherInfo.forcast.DailyForecasts.map((day, index) => {
                   return <Card day={day} key={index}></Card>;
                 })}
             </S.List>
-            {/* </S.FlexColum> */}
           </S.CityContainer>
           {isLoading && (
             <S.SpinnerWrapper>

@@ -28,7 +28,7 @@ export const List = styled.div`
   flex-direction: row;
   justify-content: center;
   flex-wrap: wrap;
-  width: 100%;
+  width: 90%;
   overflow: auto;
 
   ::-webkit-scrollbar {

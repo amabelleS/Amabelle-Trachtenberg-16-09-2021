@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react';
-// import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-// import { setLocation } from './../../store/actions/weatherActions';
 
 import Card from '../../components/FavoritesCard';
 import Text from '../../components/Text';
@@ -15,8 +13,6 @@ import * as S from './style';
 const Favorites = () => {
   const dispatch = useDispatch();
   const [favorites, setFavorites] = useState([]);
-
-  // let history = useHistory();
 
   useEffect(() => {
     const fetchFavorites = async () => {
@@ -34,16 +30,6 @@ const Favorites = () => {
     // fetchFavorites();
   }, []);
 
-  // const handelNavigateToHome = (e, fav) => {
-  //   // e.stopPropagation();
-  //   console.log(
-  //     '🚀 ~ file: Favorites.js ~ line 38 ~ handelNavigateToHome ~ fav',
-  //     fav
-  //   );
-  //   dispatch(setLocation(fav.location));
-  //   history.push('/home');
-  // };
-
   return (
     <S.Favorites>
       <S.Content>
@@ -60,13 +46,7 @@ const Favorites = () => {
 
         <S.List>
           {favorites &&
-            favorites.map((fav) => (
-              <Card
-                fav={fav}
-                key={fav.key}
-                // onClick={(fav) => handelNavigateToHome(fav)}
-              ></Card>
-            ))}
+            favorites.map((fav) => <Card fav={fav} key={fav.key}></Card>)}
         </S.List>
       </S.Content>
     </S.Favorites>

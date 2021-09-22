@@ -29,13 +29,29 @@ export const SearchSubmitContainer = styled.div`
   padding: 1rem;
 `;
 
-export const FlexColum = styled.div`
+export const FlexColumCenter = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  /* height: 50%; */
-  /* flex-grow: 1; */
-  /* padding: 1rem; */
+  align-items: center;
+`;
+export const FlexColumLeft = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+export const ImageContainer = styled.img`
+  width: 8rem;
+  height: 5rem;
+`;
+
+export const Humidity = styled.img`
+  width: 1.5rem;
+  height: 1.5rem;
+`;
+
+export const ImageTextContainer = styled.div`
+  display: flex;
+  align-items: center;
 `;
 
 export const Results = styled.div`

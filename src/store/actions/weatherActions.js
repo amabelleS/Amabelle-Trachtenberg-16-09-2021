@@ -5,7 +5,7 @@ export const getLocation = (searchTerm) => {
   return async (dispatch) => {
     dispatch({ type: types.SET_LOADING, payload: true });
     const res = await axios.get(
-      `http://dataservice.accuweather.com/locations/v1/cities/autocomplete?apikey=${process.env.REACT_APP_MANY_API_KEY}&q=${searchTerm}`
+      `http://dataservice.accuweather.com/locations/v1/cities/autocomplete?apikey=${process.env.REACT_APP_MOMO_API_KEY}&q=${searchTerm}`
     );
 
     dispatch({ type: types.SET_LOADING, payload: false });
@@ -23,7 +23,7 @@ export const getWeatherForcast = () => {
     const { Key } = state.weather.location;
     dispatch({ type: types.SET_LOADING, payload: true });
     const res = await axios.get(
-      `http://dataservice.accuweather.com/forecasts/v1/daily/5day/${Key}?apikey=${process.env.REACT_APP_MANY_API_KEY}&metric=true`
+      `http://dataservice.accuweather.com/forecasts/v1/daily/5day/${Key}?apikey=${process.env.REACT_APP_MOMO_API_KEY}&metric=true`
     );
     // dispatch({ type: "SET_TODOS", payload: res.data });
     dispatch({ type: types.SET_LOADING, payload: false });
@@ -37,7 +37,7 @@ export const getWeatherToday = () => {
     const { Key } = state.weather.location;
     dispatch({ type: types.SET_LOADING, payload: true });
     const res = await axios.get(
-      `http://dataservice.accuweather.com/currentconditions/v1/${Key}?apikey=${process.env.REACT_APP_MANY_API_KEY}&details=true&metric=true`
+      `http://dataservice.accuweather.com/currentconditions/v1/${Key}?apikey=${process.env.REACT_APP_MOMO_API_KEY}&details=true&metric=true`
     );
     // dispatch({ type: "SET_TODOS", payload: res.data });
     dispatch({ type: types.SET_LOADING, payload: false });

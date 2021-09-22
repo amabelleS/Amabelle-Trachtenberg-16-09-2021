@@ -38,7 +38,7 @@ export const getFavoritesWeather = () => {
       (loc) =>
         new Promise(async (resolve) => {
           const res = await axios.get(
-            `http://dataservice.accuweather.com/currentconditions/v1/${loc.Key}?apikey=${process.env.REACT_APP_MANY_API_KEY}&details=true`
+            `http://dataservice.accuweather.com/currentconditions/v1/${loc.Key}?apikey=${process.env.REACT_APP_MOMO_API_KEY}&details=true`
           );
           const key = loc.Key;
           const name = loc.LocalizedName;
