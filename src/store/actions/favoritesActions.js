@@ -33,13 +33,16 @@ export const getFavoritesWeather = () => {
     // const { Key } = state.weather.location;
     dispatch({ type: types.SET_LOADING, payload: true });
 
-    const promises = state.favorites.keys.map(
-      (key) =>
+    const promises = state.favorites.locations.map(
+      // const { Key}
+      (loc) =>
         new Promise(async (resolve) => {
           const res = await axios.get(
-            `http://dataservice.accuweather.com/currentconditions/v1/${key}?apikey=${process.env.REACT_APP_RESERVE_API_KEY}&details=true`
+            `http://dataservice.accuweather.com/currentconditions/v1/${loc.Key}?apikey=${process.env.REACT_APP_MANY_API_KEY}&details=true`
           );
-          const city = { ...res.data[0], key };
+          const key = loc.Key;
+          const name = loc.LocalizedName;
+          const city = { ...res.data[0], key, name, location: loc };
           resolve(city);
         })
     );

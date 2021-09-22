@@ -7,6 +7,7 @@ import * as S from './style';
 const Card = ({ day }) => {
   const date = moment(day.Date, 'DD-MM-YYYY');
   const dayName = date.format('dddd');
+  console.log(day);
 
   return (
     <S.Card>

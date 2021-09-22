@@ -19,12 +19,14 @@ export const Content = styled.div`
 
 export const Header = styled.div`
   display: flex;
+  /* justify-content: center; */
+  /* align-items: baseline; */
 `;
 
 export const List = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: center;
   flex-wrap: wrap;
   width: 100%;
   overflow: auto;

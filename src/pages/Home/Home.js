@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { useWeatherFetch } from '../../hooks/useWeatherFetch';
+// import { useWeatherFetch } from '../../hooks/useWeatherFetch';
 
 import {
   getLocation,
@@ -41,15 +41,6 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 });
 
 const Home = () => {
-  // const {
-  //   // city,
-  //   isLoading,
-  //   // fetchCity,
-  //   error,
-  //   // autoCompleteResults,
-  //   // fetcCityWeather,
-  // } = useWeatherFetch();
-
   const [searchTerm, setSearchTerm] = useState('');
   const dispatch = useDispatch();
   const [searchResult, setSearchResult] = useState([]);
@@ -63,16 +54,18 @@ const Home = () => {
 
   useEffect(() => {
     const onMountHome = async () => {
-      try {
-        const res = await dispatch(getLocation('tel aviv'));
-        await dispatch(setLocation(res[0]));
-        fetchInfo();
-      } catch (err) {
-        console.log('🚀 ~ file: Home.js ~ line 85 ~ onMountHome ~ err', err);
+      if (!selectedLocation) {
+        try {
+          const res = await dispatch(getLocation('tel aviv'));
+          await dispatch(setLocation(res[0]));
+          fetchInfo();
+        } catch (err) {
+          console.log('🚀 ~ file: Home.js ~ line 85 ~ onMountHome ~ err', err);
+        }
       }
     };
 
-    onMountHome();
+    // onMountHome();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -104,6 +97,10 @@ const Home = () => {
 
   useEffect(() => {
     if (!selectedLocation) return;
+    console.log(
+      '🚀 ~ file: Home.js ~ line 100 ~ Home ~ selectedLocation',
+      selectedLocation
+    );
     fetchInfo();
   }, [selectedLocation]);
 
@@ -231,7 +228,7 @@ const Home = () => {
             <S.List>
               {weatherInfo &&
                 weatherInfo.forcast.DailyForecasts.map((day, index) => {
-                  return <Card city={weatherInfo} day={day} key={index}></Card>;
+                  return <Card day={day} key={index}></Card>;
                 })}
             </S.List>
             {/* </S.FlexColum> */}

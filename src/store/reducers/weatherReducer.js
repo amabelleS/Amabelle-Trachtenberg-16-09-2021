@@ -1,9 +1,5 @@
 import * as types from '../actions/types';
 
-// import locationData from '../../data/autoComplete.json';
-// import currentData from '../../data/currentDay.json';
-// import forcastData from '../../data/forcast.json';
-
 const initialState = {
   location: null,
   currentCity: {},
