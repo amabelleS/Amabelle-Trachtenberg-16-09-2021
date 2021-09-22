@@ -69,7 +69,7 @@ const Home = () => {
       }
     };
 
-    // onMountHome();
+    onMountHome();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -248,7 +248,7 @@ const Home = () => {
               </S.IconButtonWrapper>
             </S.CurrentHeader>
             {isMobile ? null : (
-              <Text bold size="1.4rem">
+              <Text bold size="2rem">
                 {weatherInfo ? weatherInfo.forcast.Headline.Text : ''}
               </Text>
             )}
