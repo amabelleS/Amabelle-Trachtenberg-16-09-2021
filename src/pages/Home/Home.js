@@ -54,7 +54,10 @@ const Home = () => {
   const isLoading = useSelector((state) => state.weather.isLoading);
   // const error = useSelector((state) => state.weather.error);
   const [open, setOpen] = useState(false);
-  const [error, setError] = useState(false);
+  const [error, setError] = useState({
+    isError: false,
+    message: '',
+  });
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
   const location = useGeoLocation();
@@ -93,7 +96,13 @@ const Home = () => {
             '🚀 ~ file: Home.js ~ line 96 ~ fetchWeatherByGeoPosition ~ err',
             err
           );
-          // setError(true);
+          setError({
+            isError: true,
+            message:
+              'Geolocation not supported, Please enable to get your locations weather. ' +
+              err.message,
+            // 'Geolocation not supported, Please inable to get your locations weather',
+          });
         }
       }
     };
@@ -111,7 +120,11 @@ const Home = () => {
   const onSearchHandle = async () => {
     const res = await dispatch(getLocation(searchTerm));
     if (res.length < 1) {
-      setError(true);
+      setError({
+        isError: true,
+        message: `There Was no match for the city title you have entered. Please check
+            your spelling.`,
+      });
     }
     setSearchResult(res);
   };
@@ -171,7 +184,7 @@ const Home = () => {
   };
 
   useEffect(() => {
-    if (error) {
+    if (error.isError) {
       setOpen(true);
     }
   }, [error]);
@@ -193,11 +206,6 @@ const Home = () => {
       ) : null}
       <S.Home>
         <S.Content>
-          {/* <Text>
-            {location.loaded
-              ? JSON.stringify(location)
-              : 'location data not availble'}
-          </Text> */}
           <S.Header>
             <FormControl>
               <S.SearchSubmitContainer>
@@ -316,8 +324,7 @@ const Home = () => {
         <DialogTitle id="alert-dialog-slide-title">{'No match'}</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-slide-description">
-            There Was no match for the city title you have entered. Please check
-            your spelling.
+            {error.message}
           </DialogContentText>
         </DialogContent>
         <DialogActions>
