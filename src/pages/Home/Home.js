@@ -78,7 +78,7 @@ const Home = () => {
 
   useEffect(() => {
     const fetchWeatherByGeoPosition = async () => {
-      if (!selectedLocation) {
+      if (!selectedLocation && location.loaded) {
         try {
           const res = await dispatch(
             getLocationByGeoLocation(
@@ -93,14 +93,14 @@ const Home = () => {
             '🚀 ~ file: Home.js ~ line 96 ~ fetchWeatherByGeoPosition ~ err',
             err
           );
-          setError(true);
+          // setError(true);
         }
       }
     };
 
     fetchWeatherByGeoPosition();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [location]);
 
   const handleInputChange = (e) => {
     setSearchTerm(e.target.value);
@@ -193,11 +193,11 @@ const Home = () => {
       ) : null}
       <S.Home>
         <S.Content>
-          <Text>
+          {/* <Text>
             {location.loaded
               ? JSON.stringify(location)
               : 'location data not availble'}
-          </Text>
+          </Text> */}
           <S.Header>
             <FormControl>
               <S.SearchSubmitContainer>

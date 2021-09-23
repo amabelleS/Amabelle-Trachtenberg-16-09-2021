@@ -10,6 +10,10 @@ const useGeoLocation = () => {
   });
 
   const onSuccess = (location) => {
+    console.log(
+      '🚀 ~ file: useGeoLocation.js ~ line 13 ~ onSuccess ~ location',
+      location
+    );
     setLocation({
       loaded: true,
       coordinates: {
@@ -20,6 +24,10 @@ const useGeoLocation = () => {
   };
 
   const onError = (error) => {
+    console.log(
+      '🚀 ~ file: useGeoLocation.js ~ line 27 ~ onError ~ error',
+      error
+    );
     setLocation({
       loaded: true,
       error,
