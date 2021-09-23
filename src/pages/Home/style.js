@@ -41,6 +41,10 @@ export const FlexColumCenter = styled.div`
 export const FlexColumLeft = styled.div`
   display: flex;
   flex-direction: column;
+
+  @media (max-width: 800px) {
+    align-items: center;
+  }
 `;
 
 export const ImageContainer = styled.img`

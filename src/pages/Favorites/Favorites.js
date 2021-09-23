@@ -27,7 +27,7 @@ const Favorites = () => {
         );
       }
     };
-    fetchFavorites();
+    // fetchFavorites();
   }, []);
 
   return (

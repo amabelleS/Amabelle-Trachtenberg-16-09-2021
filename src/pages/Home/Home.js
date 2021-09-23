@@ -1,8 +1,10 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import useGeoLocation from '../../hooks/useGeoLocation';
 
 import {
   getLocation,
+  getLocationByGeoLocation,
   setLocation,
   getWeatherForcast,
   getWeatherToday,
@@ -26,7 +28,7 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import Button from '@material-ui/core/Button';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
+import { useTheme } from '@material-ui/core/styles';
 import humidityIcon from '../../assets/humidity_percentage_precipitation_icon.png';
 
 import Dialog from '@material-ui/core/Dialog';
@@ -53,8 +55,10 @@ const Home = () => {
   // const error = useSelector((state) => state.weather.error);
   const [open, setOpen] = useState(false);
   const [error, setError] = useState(false);
+  const [geoPosition, setGeoPosition] = useState({});
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
+  const location = useGeoLocation();
 
   useEffect(() => {
     const onMountHome = async () => {
@@ -69,7 +73,37 @@ const Home = () => {
       }
     };
 
-    onMountHome();
+    // onMountHome();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    const fetchWeatherByGeoPosition = async () => {
+      if (!selectedLocation) {
+        try {
+          const res = await dispatch(
+            getLocationByGeoLocation(
+              location.coordinates.lat,
+              location.coordinates.lng
+            )
+          );
+          console.log(
+            '🚀 ~ file: Home.js ~ line 89 ~ fetchWeatherByGeoPosition ~ res',
+            res
+          );
+          await dispatch(setLocation(res));
+          fetchInfo();
+        } catch (err) {
+          console.log(
+            '🚀 ~ file: Home.js ~ line 96 ~ fetchWeatherByGeoPosition ~ err',
+            err
+          );
+          setError(true);
+        }
+      }
+    };
+    fetchWeatherByGeoPosition();
+    // onMountHome();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -164,6 +198,11 @@ const Home = () => {
       ) : null}
       <S.Home>
         <S.Content>
+          <Text>
+            {location.loaded
+              ? JSON.stringify(location)
+              : 'location data not availble'}
+          </Text>
           <S.Header>
             <FormControl>
               <S.SearchSubmitContainer>
