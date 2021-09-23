@@ -55,7 +55,6 @@ const Home = () => {
   // const error = useSelector((state) => state.weather.error);
   const [open, setOpen] = useState(false);
   const [error, setError] = useState(false);
-  const [geoPosition, setGeoPosition] = useState({});
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
   const location = useGeoLocation();
@@ -87,10 +86,6 @@ const Home = () => {
               location.coordinates.lng
             )
           );
-          console.log(
-            '🚀 ~ file: Home.js ~ line 89 ~ fetchWeatherByGeoPosition ~ res',
-            res
-          );
           await dispatch(setLocation(res));
           fetchInfo();
         } catch (err) {
@@ -102,8 +97,8 @@ const Home = () => {
         }
       }
     };
+
     fetchWeatherByGeoPosition();
-    // onMountHome();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

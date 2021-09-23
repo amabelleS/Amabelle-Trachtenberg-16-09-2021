@@ -18,8 +18,7 @@ export const getLocationByGeoLocation = (lat, lng) => {
     const state = getState();
     dispatch({ type: types.SET_LOADING, payload: true });
     const res = await axios.get(
-      `http://dataservice.accuweather.com/locations/v1/cities/geoposition/search?apikey=${process.env.REACT_APP_RESERVE_API_KEY}&q=${lat}%2C${lng}&details=true&toplevel=true`
-      // `http://dataservice.accuweather.com/locations/v1/cities/geoposition/search?apikey=JJCu6e7dXQ5qGjW31VARnTNOJ04odA16&q=34.906551%2C31.952110800000003&details=true&toplevel=true`
+      `http://dataservice.accuweather.com/locations/v1/cities/geoposition/search?apikey=${process.env.REACT_APP_RESERVE_API_KEY}&q=${lat}%2C${lng}&details=true&toplevel=false`
     );
     dispatch({ type: types.SET_LOADING, payload: false });
     return res.data;
