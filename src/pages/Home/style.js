@@ -54,7 +54,9 @@ export const FavBtn = styled.button`
   border-radius: 1rem;
   cursor: pointer;
   outline: none;
-  border: none;
+  border: ${(props) => props.theme.body};
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+  border-radius: 6px;
   transition: all 0.5s linear;
   background-color: ${(props) => props.theme.primary};
   color: ${(props) => props.theme.text};
@@ -144,13 +146,10 @@ export const CityContainer = styled.div`
   border: 1px solid #84ffff;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
   border-radius: 6px;
-  /* background: rgba(240, 228, 237, 0.2);
-  color: #84ffff; */
   background-color: ${(props) => props.theme.darkLight};
   color: ${(props) => props.theme.primary};
 
   &:hover {
-    /* background: ${(props) => props.theme.secondary}; */
     border: 1px solid #08f7fb;
     color: ${(props) => props.theme.text};
   }

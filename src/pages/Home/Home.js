@@ -55,6 +55,7 @@ const Home = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
   const location = useGeoLocation();
+  const [isMetric, setIsMetric] = useState(true);
 
   useEffect(() => {
     const onMountHome = async () => {
@@ -141,7 +142,7 @@ const Home = () => {
 
   const fetchInfo = async () => {
     const today = await dispatch(getWeatherToday());
-    const forcast = await dispatch(getWeatherForcast());
+    const forcast = await dispatch(getWeatherForcast(isMetric));
     const updatedCityWeather = {
       today: today[0],
       forcast,
@@ -173,6 +174,15 @@ const Home = () => {
     }
   }, [error]);
 
+  const handelMetric = () => {
+    setIsMetric(!isMetric);
+  };
+
+  useEffect(() => {
+    fetchInfo();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isMetric]);
+
   return (
     <>
       {searchResult.length && searchTerm ? (
@@ -191,7 +201,6 @@ const Home = () => {
       <S.Home>
         <S.Content>
           <S.Header>
-            {/* <FormControl> */}
             <S.SearchSubmitContainer>
               {/* <S.FlexColumLeft> */}
 
@@ -207,6 +216,11 @@ const Home = () => {
               <S.Toggle onClick={onSearchHandle}>
                 <SearchIcon />
               </S.Toggle>
+              <S.FavBtn onClick={handelMetric}>
+                <Text bold size="1rem">
+                  {isMetric ? 'Show Farhrenheit' : 'Show Celcius'}
+                </Text>
+              </S.FavBtn>
             </S.SearchSubmitContainer>
           </S.Header>
 
@@ -243,10 +257,14 @@ const Home = () => {
                     alt=""
                   />
                   <Text size="2rem" bold>
-                    {selectedLocation && weatherInfo
+                    {selectedLocation && weatherInfo && isMetric
                       ? weatherInfo.today.Temperature.Metric.Value +
                         '\u00b0' +
                         weatherInfo.today.Temperature.Metric.Unit
+                      : weatherInfo && !isMetric
+                      ? weatherInfo.today.Temperature.Imperial.Value +
+                        '\u00b0' +
+                        weatherInfo.today.Temperature.Imperial.Unit
                       : null}
                   </Text>
                 </S.FlexColumCenter>

@@ -9,7 +9,6 @@ const initialState = {
 
 const favoritesReducer = (state = initialState, action) => {
   const { type, payload } = action;
-  console.table({ type, payload });
   switch (type) {
     case types.ADD_TO_FAVORITE: {
       localStorage.setItem(

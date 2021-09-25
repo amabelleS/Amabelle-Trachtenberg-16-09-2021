@@ -9,7 +9,7 @@ import humidityIcon from '../../assets/humidity_percentage_precipitation_icon.pn
 
 import * as S from './style';
 
-const FavoritesCard = ({ fav }) => {
+const FavoritesCard = ({ fav, isMetric }) => {
   const dispatch = useDispatch();
   let history = useHistory();
 
@@ -40,8 +40,14 @@ const FavoritesCard = ({ fav }) => {
           alt=""
         />
         <Text size="2rem" bold>
-          {fav.Temperature.Metric.Value + `\u00b0`}
-          <Text size="1.2rem">{fav.Temperature.Metric.Unit}</Text>
+          {isMetric
+            ? fav.Temperature.Metric.Value + `\u00b0`
+            : fav.Temperature.Imperial.Value + `\u00b0`}
+          <Text size="1.2rem">
+            {isMetric
+              ? fav.Temperature.Metric.Unit
+              : fav.Temperature.Imperial.Unit}
+          </Text>
         </Text>
       </S.ImageTextContainer>
 

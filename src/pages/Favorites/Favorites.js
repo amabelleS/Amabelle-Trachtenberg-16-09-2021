@@ -13,6 +13,7 @@ import * as S from './style';
 const Favorites = () => {
   const dispatch = useDispatch();
   const [favorites, setFavorites] = useState([]);
+  const [isMetric, setIsMetric] = useState(true);
 
   useEffect(() => {
     const fetchFavorites = async () => {
@@ -30,23 +31,34 @@ const Favorites = () => {
     fetchFavorites();
   }, []);
 
+  const handelMetric = () => {
+    setIsMetric(!isMetric);
+  };
+
   return (
     <S.Favorites>
       <S.Content>
-        {/* <S.Header> */}
-        <Text size="42px" bold color="#84ffff">
-          Favorites
-          <FavoriteIcon
-            color="error"
-            fontSize="medium"
-            style={{ margin: '0 0.4rem 0 0.4rem ' }}
-          />
-        </Text>
-        {/* </S.Header> */}
+        <S.Header>
+          <Text size="42px" bold color="#84ffff">
+            Favorites
+            <FavoriteIcon
+              color="error"
+              fontSize="medium"
+              style={{ margin: '0 0.4rem 0 0.4rem ' }}
+            />
+          </Text>
+          <S.FavBtn onClick={handelMetric}>
+            <Text bold size="1rem">
+              {isMetric ? 'Show Farhrenheit' : 'Show Celcius'}
+            </Text>
+          </S.FavBtn>
+        </S.Header>
 
         <S.List>
           {favorites &&
-            favorites.map((fav) => <Card fav={fav} key={fav.key}></Card>)}
+            favorites.map((fav) => (
+              <Card isMetric={isMetric} fav={fav} key={fav.key}></Card>
+            ))}
         </S.List>
       </S.Content>
     </S.Favorites>

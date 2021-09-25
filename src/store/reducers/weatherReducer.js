@@ -10,7 +10,6 @@ const initialState = {
 
 const weatherReducer = (state = initialState, action) => {
   const { type, payload } = action;
-  console.table({ type, payload });
   switch (type) {
     case types.SET_LOCATION:
       return {
