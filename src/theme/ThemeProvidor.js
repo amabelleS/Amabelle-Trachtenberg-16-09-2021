@@ -5,7 +5,7 @@ import {
 } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 
-const ThemeProvider = ({ children }) => {
+const MuiThemeProvider = ({ children }) => {
   const overrides = {
     MuiTab: {
       root: {
@@ -51,4 +51,4 @@ const ThemeProvider = ({ children }) => {
   );
 };
 
-export default ThemeProvider;
+export default MuiThemeProvider;

@@ -6,30 +6,36 @@ import {
   Redirect,
 } from 'react-router-dom';
 
-import ThemeProvider from './theme/ThemeProvidor';
+import { useDarkMode } from './styles/useDarkMode';
+import { GlobalStyles, lightTheme, darkTheme } from './styles/globalStyles';
+import { ThemeProvider } from 'styled-components';
+import MuiThemeProvider from './theme/ThemeProvidor';
 import { Provider } from 'react-redux';
 import store from './store';
 
-import { FavoritesProvider } from './context/favorites';
 import { Home, Favorites } from './pages';
 import Navbar from './components/Navbar/Navbar';
 
 function App() {
+  const [theme, toggleTheme] = useDarkMode();
+  const themeMode = theme === 'light' ? lightTheme : darkTheme;
+
   return (
-    <FavoritesProvider>
-      <ThemeProvider>
-        <Router>
+    <Router>
+      <MuiThemeProvider>
+        <ThemeProvider theme={themeMode}>
+          <GlobalStyles />
           <Provider store={store}>
-            <Navbar />
+            <Navbar darkTheme={theme} toggleTheme={toggleTheme} />
             <Switch>
               <Route exact path="/" component={Home} />
               <Route exact path="/favorites" component={Favorites} />
               <Redirect to="/" />
             </Switch>
           </Provider>
-        </Router>
-      </ThemeProvider>
-    </FavoritesProvider>
+        </ThemeProvider>
+      </MuiThemeProvider>
+    </Router>
   );
 }
 

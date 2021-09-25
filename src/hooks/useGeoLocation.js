@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 const useGeoLocation = () => {
   const [location, setLocation] = useState({
@@ -10,10 +10,6 @@ const useGeoLocation = () => {
   });
 
   const onSuccess = (location) => {
-    console.log(
-      '🚀 ~ file: useGeoLocation.js ~ line 13 ~ onSuccess ~ location',
-      location
-    );
     setLocation({
       loaded: true,
       coordinates: {
@@ -24,10 +20,10 @@ const useGeoLocation = () => {
   };
 
   const onError = (error) => {
-    console.log(
-      '🚀 ~ file: useGeoLocation.js ~ line 27 ~ onError ~ error',
-      error
-    );
+    // console.log(
+    //   '🚀 ~ file: useGeoLocation.js ~ line 27 ~ onError ~ error',
+    //   error
+    // );
     setLocation({
       loaded: true,
       error,

@@ -13,19 +13,14 @@ export const Card = styled.div`
   height: 180px;
   margin: 8px;
   padding: 1rem;
-  /* background: rgba(240, 228, 237, 0.2); */
-  /* background: url('https://cdn.pixabay.com/photo/2015/10/12/14/59/milky-way-984050__340.jpg'); */
-  /* background: url('https://cdn.pixabay.com/photo/2015/07/02/10/13/sky-828648__340.jpg'); */
   background: url('https://cdn.pixabay.com/photo/2021/08/17/14/48/sea-6553205__340.jpg');
   background-position: center;
   background-size: cover;
-
-  color: #84ffff;
+  color: ${(props) => props.theme.text};
   cursor: pointer;
 
   &:hover {
-    background: rgba(240, 228, 237, 0.2);
-    /* background: rgba(3, 160, 176, 0.5); */
+    background: ${(props) => props.theme.primary};
     border: 1px solid #08f7fb;
   }
 

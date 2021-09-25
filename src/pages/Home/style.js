@@ -27,6 +27,54 @@ export const SearchSubmitContainer = styled.div`
   display: flex;
   align-items: center;
   padding: 1rem;
+  /* background-color: ${(props) => props.theme.text};
+  color: ${(props) => props.theme.body}; */
+`;
+
+export const Toggle = styled.button`
+  cursor: pointer;
+  height: 42px;
+  width: 42px;
+  border-radius: 50%;
+  border: none;
+  margin-left: 0.5rem;
+  /* background-color: ${(props) => props.theme.text};
+  color: ${(props) => props.theme.body}; */
+  background-color: ${(props) => props.theme.body};
+  color: ${(props) => props.theme.text};
+
+  &:focus {
+    outline: none;
+  }
+  transition: all 0.5s ease;
+`;
+
+export const FavBtn = styled.button`
+  padding: 0.5rem 1.5rem;
+  border-radius: 1rem;
+  cursor: pointer;
+  outline: none;
+  border: none;
+  transition: all 0.5s linear;
+  background-color: ${(props) => props.theme.primary};
+  color: ${(props) => props.theme.text};
+  display: flex;
+  align-items: center;
+  transition: all 0.5s ease;
+`;
+
+export const InputSearch = styled.input`
+  position: relative;
+  list-style: none;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+  border-radius: 6px;
+
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  /* border:  none; */
+  background-color: ${(props) => props.theme.text};
+  color: ${(props) => props.theme.primary};
 `;
 
 export const FlexColumCenter = styled.div`
@@ -94,15 +142,17 @@ export const CityContainer = styled.div`
   width: 80%;
   height: 77%;
   border: 1px solid #84ffff;
-  /* border: 1px solid rgb(221, 87, 199); */
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
   border-radius: 6px;
-  background: rgba(240, 228, 237, 0.2);
-  color: #84ffff;
+  /* background: rgba(240, 228, 237, 0.2);
+  color: #84ffff; */
+  background-color: ${(props) => props.theme.darkLight};
+  color: ${(props) => props.theme.primary};
 
   &:hover {
-    background: rgba(3, 160, 176, 0.5);
+    /* background: ${(props) => props.theme.secondary}; */
     border: 1px solid #08f7fb;
+    color: ${(props) => props.theme.text};
   }
 
   @media (max-width: 800px) {
@@ -131,6 +181,8 @@ export const CurrentHeader = styled.div`
 export const IconButtonWrapper = styled.div`
   display: flex;
   /* flex-direction: column; */
+  background-color: ${(props) => props.theme.text};
+  /* color: ${(props) => props.theme.text}; */
   svg {
     opacity: ${({ isVisible }) => (isVisible ? 1 : 0.5)};
     transition: opacity 0.2s ease-in-out;
@@ -148,14 +200,16 @@ export const List = styled.div`
   flex-wrap: wrap;
   width: 100%;
 
-  overflow: auto;
+  overflow-y: auto;
+  overflow-x: hidden;
 
   ::-webkit-scrollbar {
     width: 0.42rem;
   }
 
   ::-webkit-scrollbar-track {
-    background-color: #84ffff;
+    /* background-color: #84ffff; */
+    background-color: ${(props) => props.theme.secondary};
     -webkit-border-radius: 10px;
     border-radius: 10px;
   }
@@ -163,7 +217,7 @@ export const List = styled.div`
   ::-webkit-scrollbar-thumb {
     -webkit-border-radius: 10px;
     border-radius: 10px;
-    background: #000000;
+    background: ${(props) => props.theme.primary};
   }
 
   @media (max-width: 800px) {

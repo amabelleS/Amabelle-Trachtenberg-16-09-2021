@@ -18,12 +18,12 @@ import Text from '../../components/Text';
 import Card from '../../components/Card';
 import Spinner from '../../components/Spinner';
 
-import FormControl from '@material-ui/core/FormControl';
+// import FormControl from '@material-ui/core/FormControl';
 // import InputLabel from '@material-ui/core/InputLabel';
-import Input from '@material-ui/core/Input';
+// import Input from '@material-ui/core/Input';
 import SearchIcon from '@mui/icons-material/Search';
-import FormHelperText from '@material-ui/core/FormHelperText';
-import IconButton from '@material-ui/core/IconButton';
+// import FormHelperText from '@material-ui/core/FormHelperText';
+// import IconButton from '@material-ui/core/IconButton';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import Button from '@material-ui/core/Button';
@@ -88,6 +88,10 @@ const Home = () => {
               location.coordinates.lat,
               location.coordinates.lng
             )
+          );
+          console.log(
+            '🚀 ~ file: Home.js ~ line 100 ~ fetchWeatherByGeoPosition ~ res',
+            res
           );
           await dispatch(setLocation(res));
           fetchInfo();
@@ -207,32 +211,32 @@ const Home = () => {
       <S.Home>
         <S.Content>
           <S.Header>
-            <FormControl>
-              <S.SearchSubmitContainer>
-                <S.FlexColumLeft>
-                  {/* <InputLabel htmlFor="my-input">Search Your City</InputLabel> */}
-                  <Input
+            {/* <FormControl> */}
+            <S.SearchSubmitContainer>
+              {/* <S.FlexColumLeft> */}
+              {/* <InputLabel htmlFor="my-input">Search Your City</InputLabel> */}
+              {/* <Input
                     id="my-input"
                     aria-describedby="my-helper-text"
                     value={searchTerm}
                     onChange={handleInputChange}
                     onKeyDown={onKeydownHandle}
                     style={{ width: '11rem' }}
-                  />
-                  <FormHelperText id="my-helper-text">
-                    Search by city name.
-                  </FormHelperText>
-                </S.FlexColumLeft>
-                <IconButton
-                  type="submit"
-                  sx={{ p: '10px' }}
-                  aria-label="search"
-                  onClick={onSearchHandle}
-                >
-                  <SearchIcon />
-                </IconButton>
-              </S.SearchSubmitContainer>
-            </FormControl>
+                  /> */}
+              <S.InputSearch
+                placeholder="Enter city name"
+                type="text"
+                name="search"
+                onChange={handleInputChange}
+                onKeyDown={onKeydownHandle}
+                value={searchTerm}
+              />
+              {/* </S.FlexColumLeft> */}
+              <S.Toggle onClick={onSearchHandle}>
+                <SearchIcon />
+              </S.Toggle>
+            </S.SearchSubmitContainer>
+            {/* </FormControl> */}
           </S.Header>
 
           <S.CityContainer>
@@ -276,18 +280,27 @@ const Home = () => {
                   </Text>
                 </S.FlexColumCenter>
               ) : null}
-              <S.IconButtonWrapper
+              {/* <S.IconButtonWrapper
+                onClick={toggleSave}
+                isVisible={selectedLocation && isLocSaved()}
+              > */}
+              <S.FavBtn
                 onClick={toggleSave}
                 isVisible={selectedLocation && isLocSaved()}
               >
-                <Button
+                <FavoriteIcon color="error" />
+                <Text size="1.2rem" bold>
+                  {isLocSaved() ? 'Remove' : 'Add To Favorites'}
+                </Text>
+              </S.FavBtn>
+              {/* <Button
                   // variant="outlined"
                   color="primary"
                   startIcon={<FavoriteIcon color="error" />}
                 >
                   {isLocSaved() ? 'Remove' : 'Add To Favorites'}
-                </Button>
-              </S.IconButtonWrapper>
+                </Button> */}
+              {/* </S.IconButtonWrapper> */}
             </S.CurrentHeader>
             {isMobile ? null : (
               <Text bold size="2rem">

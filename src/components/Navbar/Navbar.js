@@ -12,6 +12,8 @@ import Button from '@material-ui/core/Button';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import HomeIcon from '@mui/icons-material/Home';
+import DarkModeIcon from '@mui/icons-material/DarkMode';
+import LightModeIcon from '@mui/icons-material/LightMode';
 
 import * as S from './style';
 
@@ -34,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Navbar() {
+export default function Navbar({ darkTheme, toggleTheme }) {
   const history = useHistory();
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -66,11 +68,14 @@ export default function Navbar() {
     },
   ];
 
+  const icon = darkTheme === 'light' ? <DarkModeIcon /> : <LightModeIcon />;
+
   return (
     <S.Navbar>
       <AppBar position="sticky">
         <Toolbar>
           <Typography variant="h6">Herolo Home Assignment</Typography>
+          <S.Toggle onClick={toggleTheme}>{icon}</S.Toggle>
           {isMobile ? (
             <div className={classes.headerOptions}>
               <IconButton
