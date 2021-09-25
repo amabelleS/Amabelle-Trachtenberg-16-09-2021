@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import useGeoLocation from '../../hooks/useGeoLocation';
 
@@ -18,12 +18,7 @@ import Text from '../../components/Text';
 import Card from '../../components/Card';
 import Spinner from '../../components/Spinner';
 
-// import FormControl from '@material-ui/core/FormControl';
-// import InputLabel from '@material-ui/core/InputLabel';
-// import Input from '@material-ui/core/Input';
 import SearchIcon from '@mui/icons-material/Search';
-// import FormHelperText from '@material-ui/core/FormHelperText';
-// import IconButton from '@material-ui/core/IconButton';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import Button from '@material-ui/core/Button';
@@ -52,7 +47,6 @@ const Home = () => {
   const favoritesKeys = useSelector((state) => state.favorites.keys);
   const selectedLocation = useSelector((state) => state.weather.location);
   const isLoading = useSelector((state) => state.weather.isLoading);
-  // const error = useSelector((state) => state.weather.error);
   const [open, setOpen] = useState(false);
   const [error, setError] = useState({
     isError: false,
@@ -89,10 +83,6 @@ const Home = () => {
               location.coordinates.lng
             )
           );
-          console.log(
-            '🚀 ~ file: Home.js ~ line 100 ~ fetchWeatherByGeoPosition ~ res',
-            res
-          );
           await dispatch(setLocation(res));
           fetchInfo();
         } catch (err) {
@@ -105,7 +95,6 @@ const Home = () => {
             message:
               'Geolocation not supported, Please enable to get your locations weather. ' +
               err.message,
-            // 'Geolocation not supported, Please inable to get your locations weather',
           });
         }
       }
@@ -147,15 +136,7 @@ const Home = () => {
 
   useEffect(() => {
     if (!selectedLocation) return;
-    console.log(
-      '🚀 ~ file: Home.js ~ line 100 ~ Home ~ selectedLocation',
-      selectedLocation
-    );
     fetchInfo();
-    console.log(
-      '🚀 ~ file: Home.js ~ line 107 ~ useEffect ~ weatherInfo',
-      weatherInfo
-    );
   }, [selectedLocation]);
 
   const fetchInfo = async () => {
@@ -180,7 +161,6 @@ const Home = () => {
         ? removeFromFavorites(selectedLocation.Key)
         : addToFavorites()
     );
-    // console.log('🚀 ~ file: Home.js ~ line 74 ~ Home ~ favs', favoritesKeys);
   };
 
   const handleClose = () => {
@@ -214,15 +194,7 @@ const Home = () => {
             {/* <FormControl> */}
             <S.SearchSubmitContainer>
               {/* <S.FlexColumLeft> */}
-              {/* <InputLabel htmlFor="my-input">Search Your City</InputLabel> */}
-              {/* <Input
-                    id="my-input"
-                    aria-describedby="my-helper-text"
-                    value={searchTerm}
-                    onChange={handleInputChange}
-                    onKeyDown={onKeydownHandle}
-                    style={{ width: '11rem' }}
-                  /> */}
+
               <S.InputSearch
                 placeholder="Enter city name"
                 type="text"
@@ -236,7 +208,6 @@ const Home = () => {
                 <SearchIcon />
               </S.Toggle>
             </S.SearchSubmitContainer>
-            {/* </FormControl> */}
           </S.Header>
 
           <S.CityContainer>
@@ -280,10 +251,6 @@ const Home = () => {
                   </Text>
                 </S.FlexColumCenter>
               ) : null}
-              {/* <S.IconButtonWrapper
-                onClick={toggleSave}
-                isVisible={selectedLocation && isLocSaved()}
-              > */}
               <S.FavBtn
                 onClick={toggleSave}
                 isVisible={selectedLocation && isLocSaved()}
@@ -293,14 +260,6 @@ const Home = () => {
                   {isLocSaved() ? 'Remove' : 'Add To Favorites'}
                 </Text>
               </S.FavBtn>
-              {/* <Button
-                  // variant="outlined"
-                  color="primary"
-                  startIcon={<FavoriteIcon color="error" />}
-                >
-                  {isLocSaved() ? 'Remove' : 'Add To Favorites'}
-                </Button> */}
-              {/* </S.IconButtonWrapper> */}
             </S.CurrentHeader>
             {isMobile ? null : (
               <Text bold size="2rem">
