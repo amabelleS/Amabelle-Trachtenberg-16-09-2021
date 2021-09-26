@@ -140,7 +140,3 @@ export default function Navbar({ darkTheme, toggleTheme }) {
     </S.Navbar>
   );
 }
-
-//  <NavLink style={{ color: 'white' }} to="/favorites">
-//    Fav
-//  </NavLink>;

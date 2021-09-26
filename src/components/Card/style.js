@@ -6,19 +6,23 @@ export const Card = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
-  /* gap: 6px; */
+  border: 1px solid ${(props) => props.theme.text};
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
   border-radius: 6px;
   height: 180px;
   margin: 8px;
+  /* background: ${(props) => props.theme.body}; */
+  background: url('https://cdn.pixabay.com/photo/2021/08/17/14/48/sea-6553205__340.jpg');
+
+  &:hover {
+    background: ${(props) => props.theme.darkLight};
+  }
 `;
 
 export const Images = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
-  /* width: 50%; */
-  /* padding: 1rem; */
 `;
 
 export const Temperature = styled.div`

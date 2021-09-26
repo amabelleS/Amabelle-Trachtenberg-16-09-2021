@@ -101,7 +101,7 @@ const Home = () => {
       }
     };
 
-    fetchWeatherByGeoPosition();
+    // fetchWeatherByGeoPosition();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location]);
 
@@ -138,6 +138,7 @@ const Home = () => {
   useEffect(() => {
     if (!selectedLocation) return;
     fetchInfo();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedLocation]);
 
   const fetchInfo = async () => {
@@ -202,8 +203,6 @@ const Home = () => {
         <S.Content>
           <S.Header>
             <S.SearchSubmitContainer>
-              {/* <S.FlexColumLeft> */}
-
               <S.InputSearch
                 placeholder="Enter city name"
                 type="text"
@@ -212,18 +211,16 @@ const Home = () => {
                 onKeyDown={onKeydownHandle}
                 value={searchTerm}
               />
-              {/* </S.FlexColumLeft> */}
               <S.Toggle onClick={onSearchHandle}>
                 <SearchIcon />
               </S.Toggle>
-              <S.FavBtn onClick={handelMetric}>
-                <Text bold size="1rem">
-                  {isMetric ? 'Show Farhrenheit' : 'Show Celcius'}
-                </Text>
-              </S.FavBtn>
             </S.SearchSubmitContainer>
+            <S.FavBtn onClick={handelMetric}>
+              <Text bold size="1rem">
+                {isMetric ? 'Show Farhrenheit' : 'Show Celcius'}
+              </Text>
+            </S.FavBtn>
           </S.Header>
-
           <S.CityContainer>
             <S.CurrentHeader>
               <S.FlexColumLeft>

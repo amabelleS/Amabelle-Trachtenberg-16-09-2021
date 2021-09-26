@@ -19,8 +19,6 @@ export const Content = styled.div`
 
 export const Header = styled.div`
   display: flex;
-  /* justify-content: space-between; */
-  /* align-items: baseline; */
 `;
 
 export const List = styled.div`
@@ -36,7 +34,7 @@ export const List = styled.div`
   }
 
   ::-webkit-scrollbar-track {
-    background-color: #84ffff;
+    background: ${(props) => props.theme.secondary};
     -webkit-border-radius: 10px;
     border-radius: 10px;
   }
@@ -44,12 +42,7 @@ export const List = styled.div`
   ::-webkit-scrollbar-thumb {
     -webkit-border-radius: 10px;
     border-radius: 10px;
-    background: #000000;
-  }
-
-  @media (max-width: 800px) {
-    display: block;
-    /* flex-direction: column; */
+    background: ${(props) => props.theme.text};
   }
 `;
 

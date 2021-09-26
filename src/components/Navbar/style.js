@@ -8,17 +8,8 @@ export const Navbar = styled.div`
   flex-grow: 1;
   align-items: center;
   justify-content: space-between;
-  /* background: ${({ theme }) => theme.body}; */
   background-color: ${(props) => props.theme.body};
   color: ${(props) => props.theme.text};
-`;
-
-export const FlexRow = styled.div`
-  display: flex;
-  flex-direction: row;
-  flex-grow: 1;
-  align-items: center;
-  justify-content: space-between;
 `;
 
 export const Toggle = styled.button`
@@ -28,13 +19,11 @@ export const Toggle = styled.button`
   border-radius: 50%;
   border: none;
   margin-left: 1rem;
-  /* background-color: ${(props) => props.theme.text};
-  color: ${(props) => props.theme.body}; */
   background-color: ${(props) => props.theme.body};
   color: ${(props) => props.theme.text};
 
-  &:focus {
-    outline: none;
+  &:hover {
+    background: #018786;
   }
   transition: all 0.5s ease;
 `;

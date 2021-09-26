@@ -21,14 +21,16 @@ export const Header = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
+  margin-bottom: 1rem;
+  @media (max-width: 800px) {
+    flex-direction: column;
+  }
 `;
 
 export const SearchSubmitContainer = styled.div`
   display: flex;
   align-items: center;
   padding: 1rem;
-  /* background-color: ${(props) => props.theme.text};
-  color: ${(props) => props.theme.body}; */
 `;
 
 export const Toggle = styled.button`
@@ -38,11 +40,8 @@ export const Toggle = styled.button`
   border-radius: 50%;
   border: none;
   margin-left: 0.5rem;
-  /* background-color: ${(props) => props.theme.text};
-  color: ${(props) => props.theme.body}; */
   background-color: ${(props) => props.theme.body};
   color: ${(props) => props.theme.text};
-
   &:focus {
     outline: none;
   }
@@ -54,7 +53,7 @@ export const FavBtn = styled.button`
   border-radius: 1rem;
   cursor: pointer;
   outline: none;
-  border: ${(props) => props.theme.body};
+  border: 1px solid ${(props) => props.theme.text};
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
   border-radius: 6px;
   transition: all 0.5s linear;
@@ -63,6 +62,10 @@ export const FavBtn = styled.button`
   display: flex;
   align-items: center;
   transition: all 0.5s ease;
+  background: ${(props) => props.theme.darkLight};
+  &:hover {
+    background: ${(props) => props.theme.body};
+  }
 `;
 
 export const InputSearch = styled.input`
@@ -70,13 +73,14 @@ export const InputSearch = styled.input`
   list-style: none;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
   border-radius: 6px;
-
   display: flex;
   align-items: center;
   padding: 1rem;
-  /* border:  none; */
   background-color: ${(props) => props.theme.text};
   color: ${(props) => props.theme.primary};
+  &:focus {
+    outline: none;
+  }
 `;
 
 export const FlexColumCenter = styled.div`
@@ -114,22 +118,21 @@ export const ImageTextContainer = styled.div`
 
 export const Results = styled.div`
   position: absolute;
-  background: #000000;
-  color: #e7e7e7;
-  /* width: 100%; */
+  background-color: ${(props) => props.theme.text};
+  color: ${(props) => props.theme.primary};
   z-index: 22;
-  /* top: 6rem; */
-  /* right: 6rem; */
   border: 1px solid #e7e7e7;
-  /* box-shadow: 0px 2px 3px 0px #e7e7e7; */
   .result {
     padding: 1rem;
     border-bottom: 1px solid #cbcbcb;
     transition: all 0.2s;
     &:hover {
-      background: #f0f0f0;
-      color: #000000;
+      background-color: ${(props) => props.theme.primary};
+      color: ${(props) => props.theme.text};
       cursor: pointer;
+    }
+    &:focus {
+      outline: none;
     }
   }
 `;
@@ -168,8 +171,6 @@ export const CurrentHeader = styled.div`
   width: 100%;
 
   @media (max-width: 800px) {
-    /* height: 100%; */
-    /* display: block; */
     flex-direction: column;
     align-items: center;
     height: 42vh;
@@ -179,9 +180,7 @@ export const CurrentHeader = styled.div`
 
 export const IconButtonWrapper = styled.div`
   display: flex;
-  /* flex-direction: column; */
   background-color: ${(props) => props.theme.text};
-  /* color: ${(props) => props.theme.text}; */
   svg {
     opacity: ${({ isVisible }) => (isVisible ? 1 : 0.5)};
     transition: opacity 0.2s ease-in-out;
@@ -207,8 +206,7 @@ export const List = styled.div`
   }
 
   ::-webkit-scrollbar-track {
-    /* background-color: #84ffff; */
-    background-color: ${(props) => props.theme.secondary};
+    background: ${(props) => props.theme.secondary};
     -webkit-border-radius: 10px;
     border-radius: 10px;
   }
@@ -216,12 +214,11 @@ export const List = styled.div`
   ::-webkit-scrollbar-thumb {
     -webkit-border-radius: 10px;
     border-radius: 10px;
-    background: ${(props) => props.theme.primary};
+    background: ${(props) => props.theme.text};
   }
 
   @media (max-width: 800px) {
     display: block;
-    /* height: 42vh; */
   }
 `;
 

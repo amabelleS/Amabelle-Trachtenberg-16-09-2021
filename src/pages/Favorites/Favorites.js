@@ -20,7 +20,6 @@ const Favorites = () => {
       try {
         const res = await dispatch(getFavoritesWeather());
         setFavorites(res);
-        console.log('🚀 ~ file: Favorites.js ~ line 26 ~ useEffect ~ res', res);
       } catch (error) {
         console.log(
           '🚀 ~ file: Favorites.js ~ line 29 ~ useEffect ~ error',
@@ -29,6 +28,7 @@ const Favorites = () => {
       }
     };
     fetchFavorites();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handelMetric = () => {

@@ -20,10 +20,6 @@ const useGeoLocation = () => {
   };
 
   const onError = (error) => {
-    // console.log(
-    //   '🚀 ~ file: useGeoLocation.js ~ line 27 ~ onError ~ error',
-    //   error
-    // );
     setLocation({
       loaded: true,
       error,

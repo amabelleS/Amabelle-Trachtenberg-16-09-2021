@@ -12,7 +12,6 @@ const MuiThemeProvider = ({ children }) => {
         backgroundColor: '#303030',
       },
     },
-    // MuiAppBar: { colorPrimary: { backgroundColor: '#FFC0CB' } },
   };
 
   const theme = React.useMemo(

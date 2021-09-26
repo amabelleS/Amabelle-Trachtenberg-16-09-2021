@@ -4,10 +4,6 @@ import * as types from './types';
 export const addToFavorites = () => {
   return (dispatch, getState) => {
     const state = getState();
-    console.log(
-      '🚀 ~ file: favoritesActions.js ~ line 10 ~ return ~ state',
-      state
-    );
     dispatch({
       type: types.ADD_TO_FAVORITE,
       payload: state.weather.location,
@@ -22,23 +18,18 @@ export const removeFromFavorites = (key = null) => {
       type: types.REMOVE_FROM_FAVORITE,
       payload: state.weather.location?.Key || key,
     });
-    // localStorage.setItem('favorites', JSON.stringify(state.favorites));
   };
 };
 
 export const getFavoritesWeather = () => {
   return async (dispatch, getState) => {
     const state = getState();
-    console.log(state);
-    // const { Key } = state.weather.location;
     dispatch({ type: types.SET_LOADING, payload: true });
-
     const promises = state.favorites.locations.map(
-      // const { Key}
       (loc) =>
         new Promise(async (resolve) => {
           const res = await axios.get(
-            `https://dataservice.accuweather.com/currentconditions/v1/${loc.Key}?apikey=${process.env.REACT_APP_MANY_API_KEY}&details=true`
+            `https://dataservice.accuweather.com/currentconditions/v1/${loc.Key}?apikey=${process.env.REACT_APP_BLUEBELL_API_KEY}&details=true`
           );
           const key = loc.Key;
           const name = loc.LocalizedName;
@@ -49,10 +40,6 @@ export const getFavoritesWeather = () => {
 
     const data = await Promise.all(promises);
     dispatch({ type: types.SET_LOADING, payload: false });
-    console.log(
-      '🚀 ~ file: favoritesActions.js ~ line 57 ~ return ~ data',
-      data
-    );
     return data;
   };
 };

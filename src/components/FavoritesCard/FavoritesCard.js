@@ -14,12 +14,6 @@ const FavoritesCard = ({ fav, isMetric }) => {
   let history = useHistory();
 
   const handelNavigateToHome = () => {
-    // e.stopPropagation();
-    console.log(
-      '🚀 ~ file: FavoritesCard.js ~ line 15 ~ handelNavigateToHome ~ fav',
-      fav
-    );
-
     dispatch(setLocation(fav.location));
     history.push('/home');
   };
