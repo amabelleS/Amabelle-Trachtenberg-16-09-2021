@@ -101,7 +101,7 @@ const Home = () => {
       }
     };
 
-    // fetchWeatherByGeoPosition();
+    fetchWeatherByGeoPosition();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location]);
 
