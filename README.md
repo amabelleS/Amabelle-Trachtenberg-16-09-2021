@@ -1,7 +1,7 @@
 # Herolo Home Assignment
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-This project makes use of material-ui, styled-components..
+This project makes use of material-ui and styled-components
 
 ## OVERVIEW
 
