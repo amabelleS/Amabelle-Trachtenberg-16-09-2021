@@ -11,7 +11,6 @@ export const Card = styled.div`
   border-radius: 6px;
   height: 180px;
   margin: 8px;
-  /* background: ${(props) => props.theme.body}; */
   background: url('https://cdn.pixabay.com/photo/2021/08/17/14/48/sea-6553205__340.jpg');
 
   &:hover {

@@ -6,18 +6,9 @@ import {
 import CssBaseline from '@material-ui/core/CssBaseline';
 
 const MuiThemeProvider = ({ children }) => {
-  const overrides = {
-    MuiTab: {
-      root: {
-        backgroundColor: '#303030',
-      },
-    },
-  };
-
   const theme = React.useMemo(
     () =>
       createTheme({
-        overrides,
         palette: {
           type: 'dark',
           primary: {

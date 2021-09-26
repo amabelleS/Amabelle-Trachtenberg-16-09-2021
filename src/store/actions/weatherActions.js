@@ -47,7 +47,7 @@ export const getWeatherToday = () => {
     const { Key } = state.weather?.location || 215854;
     dispatch({ type: types.SET_LOADING, payload: true });
     const res = await axios.get(
-      `https://dataservice.accuweather.com/currentconditions/v1/${Key}?apikey=${process.env.REACT_APP_BLUEBELL_API_KEY}&details=true&metric=true`
+      `https://dataservice.accuweather.com/currentconditions/v1/${Key}?apikey=${process.env.REACT_APP_BLUEBELL_API_KEY}&details=true`
     );
     dispatch({ type: types.SET_LOADING, payload: false });
     return res.data;
