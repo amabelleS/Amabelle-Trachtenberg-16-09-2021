@@ -57,23 +57,6 @@ const Home = () => {
   const location = useGeoLocation();
   const [isMetric, setIsMetric] = useState(true);
 
-  // useEffect(() => {
-  //   const onMountHome = async () => {
-  //     if (!selectedLocation) {
-  //       try {
-  //         const res = await dispatch(getLocation('tel aviv'));
-  //         await dispatch(setLocation(res[0]));
-  //         fetchInfo();
-  //       } catch (err) {
-  //         console.log('🚀 ~ file: Home.js ~ line 85 ~ onMountHome ~ err', err);
-  //       }
-  //     }
-  //   };
-
-  //   // onMountHome();
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, []);
-
   useEffect(() => {
     const fetchWeatherByGeoPosition = async () => {
       if (!selectedLocation && location.loaded) {
